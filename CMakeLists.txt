@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 set(NAME "MDDNAME" CACHE STRING "")
-set(VERSION 1.0.1 CACHE STRING "")
+set(VERSION 1.0.0 CACHE STRING "")
 set(AE_VERSION 1)
 
 # ---- Options ----
@@ -72,6 +72,12 @@ project(
 )
 
 configure_file(
+	${CMAKE_CURRENT_SOURCE_DIR}/cmake/Version.h.in
+	${CMAKE_CURRENT_BINARY_DIR}/include/Version.h
+	@ONLY
+)
+
+configure_file(
 	${CMAKE_CURRENT_SOURCE_DIR}/cmake/version.rc.in
 	${CMAKE_CURRENT_BINARY_DIR}/version.rc
 	@ONLY
@@ -128,17 +134,17 @@ include(cmake/lib/automaticGameFolderOutput.cmake)
 
 source_group(
 	TREE
-		${CMAKE_CURRENT_SOURCE_DIR}
+		${CMAKE_CURRENT_BINARY_DIR}
 	FILES
-		${headers}
-		${sources}
+		${CMAKE_CURRENT_BINARY_DIR}/include/Version.h
 )
 
 source_group(
 	TREE
-		${CMAKE_CURRENT_BINARY_DIR}
+		${CMAKE_CURRENT_SOURCE_DIR}
 	FILES
-		${CMAKE_CURRENT_BINARY_DIR}/include/Version.h
+		${headers}
+		${sources}
 )
 
 # ---- Create DLL ----
